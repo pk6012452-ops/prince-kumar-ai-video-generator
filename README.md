@@ -1,16 +1,16 @@
-# PRINCE KUMAR AI VIDEO GENERATOR
+# PRINCE KUMAR AI Video Generator
 
-Welcome to my AI video generator project!
+A beginner-friendly Hindi video planning studio.
 
-## Features
-- Hindi AI story writing
-- Scene by scene image prompts
-- AI video prompts
-- Hindi voiceover
-- YouTube Shorts 9:16
-- YouTube Videos 16:9
-- Title, description and hashtags
-- Video creation and export
+## Included
+- Hindi video package starter
+- Scene-by-scene image and video prompt generation
+- 9:16 Shorts and 16:9 YouTube presets
+- Title, description, hashtags
+- Downloadable text package
 
-## Channel
-PRINCE KUMAR AI
+## Use
+Open `index.html` in a modern browser. No installation is required.
+
+## Important
+This starter creates scripts and prompts locally in your browser. Real AI voice, image/video generation, and YouTube publishing require provider APIs and explicit account authorization. Do not place API keys in this static website or commit secrets to GitHub.

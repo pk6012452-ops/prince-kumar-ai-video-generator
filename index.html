@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PRINCE KUMAR AI — Video Studio</title>
+<style>
+:root{--bg:#0b1020;--panel:#141d33;--panel2:#1b2945;--text:#f4f7ff;--muted:#aab7d0;--gold:#ffca58;--line:#2b3a59}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(145deg,#080d19,#101b32);color:var(--text);font:16px system-ui,Arial,sans-serif}
+header{padding:26px 18px;text-align:center;border-bottom:1px solid var(--line);background:#0b1222}
+.logo{color:var(--gold);font-weight:900;letter-spacing:2px;font-size:clamp(22px,5vw,34px)}header p{color:var(--muted);margin:8px 0 0}
+main{max-width:1000px;margin:auto;padding:20px 14px 50px}.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px;margin:14px 0;box-shadow:0 12px 30px #0003}
+h2{font-size:19px;margin:0 0 14px;color:var(--gold)}label{display:block;color:var(--muted);font-size:14px;margin:12px 0 6px}
+input,textarea,select{width:100%;padding:12px;border-radius:10px;border:1px solid var(--line);background:#0d1629;color:var(--text);font:inherit}
+textarea{min-height:100px;resize:vertical}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+button{border:0;border-radius:10px;padding:12px 16px;background:var(--gold);color:#17120a;font-weight:800;font-size:15px;cursor:pointer;margin:10px 8px 0 0}
+button.secondary{background:var(--panel2);color:var(--text);border:1px solid var(--line)}
+.output{white-space:pre-wrap;min-height:90px;background:#0a1325;border:1px dashed #405477;border-radius:10px;padding:14px;color:#e8efff}
+.small{font-size:13px;color:var(--muted);line-height:1.5}.pill{display:inline-block;border:1px solid var(--line);border-radius:99px;padding:5px 10px;color:var(--muted);font-size:12px;margin:4px}
+footer{text-align:center;color:var(--muted);padding:22px;font-size:13px}
+</style>
+</head>
+<body>
+<header><div class="logo">PRINCE KUMAR AI</div><p>Hindi Story • Scene Prompts • YouTube Video Studio</p><span class="pill">SHORTS 9:16</span><span class="pill">YOUTUBE 16:9</span></header>
+<main>
+<section class="card">
+<h2>🎬 नया वीडियो बनाओ</h2>
+<div class="grid">
+<div><label>वीडियो का विषय</label><input id="topic" placeholder="जैसे: बारिश कैसे होती है?"></div>
+<div><label>वीडियो फॉर्मेट</label><select id="format"><option value="9:16 vertical YouTube Shorts">YouTube Shorts — 9:16</option><option value="16:9 widescreen YouTube video">YouTube Video — 16:9</option></select></div>
+<div><label>वीडियो की अवधि</label><select id="duration"><option>30 सेकंड</option><option>15 सेकंड</option><option>1 मिनट</option><option>2 मिनट</option></select></div>
+<div><label>वीडियो स्टाइल</label><select id="style"><option>3D cinematic animation</option><option>2D storybook animation</option><option>Realistic documentary</option><option>Kids cartoon</option><option>Emotional cinematic</option></select></div>
+</div>
+<label>कहानी या जरूरी जानकारी (वैकल्पिक)</label><textarea id="notes" placeholder="यहाँ अपनी कहानी या जानकारी लिखो..."></textarea>
+<button onclick="makePlan()">मेरे लिए वीडियो पैकेज बनाओ</button>
+<button class="secondary" onclick="clearAll()">साफ़ करो</button>
+<p class="small">यह शुरुआती प्रोटोटाइप स्क्रिप्ट और prompts तैयार करता है। असली AI image/video generation और YouTube upload जोड़ने के लिए बाद में सुरक्षित API कनेक्शन सेट करने होंगे।</p>
+</section>
+<section class="card"><h2>📝 हिंदी स्क्रिप्ट</h2><div id="script" class="output">तुम्हारा वीडियो पैकेज यहाँ दिखाई देगा...</div></section>
+<section class="card"><h2>🖼️ Image और Video Prompts</h2><div id="prompts" class="output">यहाँ scene-by-scene prompts आएँगे...</div></section>
+<section class="card"><h2>📢 YouTube Upload Details</h2><div id="meta" class="output">Title, description और hashtags यहाँ आएँगे...</div><button class="secondary" onclick="downloadPack()">पूरा पैकेज डाउनलोड करो (.txt)</button></section>
+</main><footer>Made for PRINCE KUMAR AI • Starter version</footer>
+<script>
+let pack='';
+function makePlan(){
+ const topic=document.getElementById('topic').value.trim()||'एक प्रेरणादायक छोटी कहानी';
+ const format=document.getElementById('format').value, duration=document.getElementById('duration').value, style=document.getElementById('style').value;
+ const notes=document.getElementById('notes').value.trim();
+ const scenes=duration.includes('15')?3:duration.includes('30')?4:duration.includes('1')?6:8;
+ const hook=`क्या आपने कभी सोचा है — ${topic}? चलिए जानते हैं!`;
+ const script=`वीडियो विषय: ${topic}\nफॉर्मेट: ${format}\nअवधि: ${duration}\n\nओपनिंग हुक:\n${hook}\n\nमुख्य स्क्रिप्ट:\n${notes||'इस विषय को आसान हिंदी में, रोचक उदाहरणों के साथ समझाएँ। शुरुआत में सवाल रखें, बीच में सरल तथ्य दें और अंत में याद रहने वाला संदेश दें।'}\n\nसमापन:\nअगर आपको यह वीडियो पसंद आया, तो PRINCE KUMAR AI को Subscribe करें!`;
+ let p=''; for(let i=1;i<=scenes;i++){p+=`SCENE ${i}\nImage prompt (English): ${style}, consistent characters and visual style, cinematic composition, detailed environment, scene ${i} about "${topic}", ${format}, high quality, no text, no watermark.\nVideo prompt (English): Animate this exact scene smoothly, natural motion, expressive but consistent characters, cinematic camera movement, clear visual storytelling, ${format}.\nHindi narration: ${i===1?hook:'इस सीन में विषय को सरल और दिलचस्प तरीके से आगे बढ़ाएँ।'}\n\n`;}
+ const meta=`Title: ${topic} | आसान हिंदी में जानिए | PRINCE KUMAR AI\n\nDescription:\nआज के वीडियो में जानिए ${topic} के बारे में आसान और रोचक जानकारी। वीडियो पसंद आए तो Like, Share और Subscribe करें।\n\nHashtags:\n#PrinceKumarAI #HindiVideo #YouTubeShorts #AIAnimation #HindiStory #Knowledge`;
+ document.getElementById('script').textContent=script;
+ document.getElementById('prompts').textContent=p;
+ document.getElementById('meta').textContent=meta;
+ pack=`PRINCE KUMAR AI VIDEO PACKAGE\n\n${script}\n\n${p}\n${meta}`;
+}
+function downloadPack(){if(!pack){makePlan()}const a=document.createElement('a');const url=URL.createObjectURL(new Blob([pack],{type:'text/plain;charset=utf-8'}));a.href=url;a.download='prince-kumar-ai-video-package.txt';a.click();URL.revokeObjectURL(url)}
+function clearAll(){['topic','notes'].forEach(id=>document.getElementById(id).value='');['script','prompts','meta'].forEach(id=>document.getElementById(id).textContent='यहाँ परिणाम दिखाई देंगे...');pack=''}
+</script>
+</body></html>
